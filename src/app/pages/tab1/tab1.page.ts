@@ -16,6 +16,7 @@ export class Tab1Page implements OnInit {
   ngOnInit(): void {
     this.postService.getPosts().subscribe(data => {
       this.posts.push(...data.posts);
+      console.log(this.posts);
     });
   }
 
