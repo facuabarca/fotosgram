@@ -10,14 +10,30 @@ import { Post } from '../../interfaces/interfaces';
 export class Tab1Page implements OnInit {
 
   posts: Array<Post> = [];
+  enabled: boolean = true;
 
   constructor(private postService: PostsService) { }
 
   ngOnInit(): void {
-    this.postService.getPosts().subscribe(data => {
+    this.loadData();
+  }
+
+  loadData(event?: any, pull: boolean = false): void {
+    this.postService.getPosts(pull).subscribe(data => {
       this.posts.push(...data.posts);
-      console.log(this.posts);
+      if (event) {
+        event.target.complete();
+        if (data.posts.length === 0) {
+          this.enabled = false;
+        }
+      }
     });
+  }
+
+  reload(event: any): void {
+    this.loadData(event, true);
+    this.posts = [];
+    this.enabled = true;
   }
 
 }
