@@ -20,10 +20,27 @@ export class UsuarioService {
       email, password
     };
 
-    this.http.post(`${URL}/user/login`, data)
-    .subscribe(resp => {
-      console.log(resp);
-    })
+    return new Promise(resolve => {
 
+      this.http.post(`${URL}/user/login`, data)
+        .subscribe((resp: any) => {
+          console.log(resp);
+          if(resp.ok) {
+            this.saveToken(resp.token);
+            resolve(true);
+          } else {
+            this.token = null;
+            this.storage.clear();
+            resolve(false);
+          }
+        });
+    });
+
+
+  }
+
+  async saveToken(token: string) {
+    this.token = token;
+    await this.storage.set('token', this.token);
   }
 }
