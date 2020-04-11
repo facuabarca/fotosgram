@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { PostsComponent } from './posts/posts.component';
 import { PostComponent } from './post/post.component';
+import { PipesModule } from '../pipes/pipes.module';
+
 
 
 
@@ -12,7 +14,8 @@ import { PostComponent } from './post/post.component';
     PostComponent],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    PipesModule
   ],
   exports: [
     PostsComponent
