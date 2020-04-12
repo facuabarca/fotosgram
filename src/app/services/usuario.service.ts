@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { environment } from '../../environments/environment';
+import { User } from '../interfaces/interfaces';
 
 const URL = environment.urlApi;
 
@@ -25,7 +26,7 @@ export class UsuarioService {
       this.http.post(`${URL}/user/login`, data)
         .subscribe((resp: any) => {
           console.log(resp);
-          if(resp.ok) {
+          if (resp.ok) {
             this.saveToken(resp.token);
             resolve(true);
           } else {
@@ -37,6 +38,24 @@ export class UsuarioService {
     });
 
 
+  }
+
+  register(usuario: User): Promise<any> {
+
+    return new Promise(resolve => {
+      this.http.post(`${URL}/user/create`, usuario)
+        .subscribe((resp: any) => {
+          console.log(resp);
+          if (resp.ok) {
+            this.saveToken(resp.token);
+            resolve(true);
+          } else {
+            this.token = null;
+            this.storage.clear();
+            resolve(false);
+          }
+        });
+    });
   }
 
   async saveToken(token: string) {
