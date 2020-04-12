@@ -55,6 +55,7 @@ export class Tab2Page {
       const coords = `${resp.coords.latitude},${resp.coords.longitude}`;
       this.loadGeolocation = false;
       this.post.coords = coords;
+      console.log('coords;;; ',this.post.coords);
      }).catch((error) => {
       this.loadGeolocation = false;
      });

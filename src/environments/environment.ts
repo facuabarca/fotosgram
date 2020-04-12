@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  urlApi: 'http://localhost:3000'
+  urlApi: 'http://localhost:3000',
+  mapToken: 'pk.eyJ1IjoiZmFjdWFiYXJjYSIsImEiOiJjazhjdmlibzAwcWFyM2lxcGVkdTEzNmZjIn0.YNJmBXjXuWkn_9xsXf1Taw'
 };
 
 /*
