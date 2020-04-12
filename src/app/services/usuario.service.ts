@@ -101,4 +101,27 @@ export class UsuarioService {
       });
     });
   }
+
+  updateUsuario(user: User) {
+    const headers = new HttpHeaders({
+      'x-token': this.token
+    });
+
+    return new Promise(resolve => {
+
+      
+      this.http.post(`${URL}/user/update`, user, { headers })
+      .subscribe((resp: any) => {
+        console.log(resp)
+        if(resp.ok) {
+          this.saveToken(resp.token);
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
+
+
+  }
 }
