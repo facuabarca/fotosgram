@@ -13,9 +13,17 @@ const URL = environment.urlApi;
 export class UsuarioService {
 
   token: string = null;
-  usuario: User = {};
+  private usuario: User = {};
 
   constructor(private http: HttpClient, private storage: Storage, private navCtrl: NavController) { }
+
+
+  getUsuario() {
+    if(this.usuario._id) {
+      this.verifyToken();
+    }
+    return { ...this.usuario }
+  }
 
   login(email: string, password: string) {
 
