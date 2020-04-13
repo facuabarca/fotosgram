@@ -112,7 +112,6 @@ export class UsuarioService {
       
       this.http.post(`${URL}/user/update`, user, { headers })
       .subscribe((resp: any) => {
-        console.log(resp)
         if(resp.ok) {
           this.saveToken(resp.token);
           resolve(true);
