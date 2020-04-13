@@ -18,14 +18,12 @@ export class Tab3Page implements OnInit {
 
   ngOnInit(): void {
     this.usuario = this.usuarioService.getUsuario();
-    console.log(this.usuario);
   }
 
   async update(fUpdate: NgForm) {
 
     if(fUpdate.invalid) { return; }
     const isUpdated = await this.usuarioService.updateUsuario(this.usuario);
-    console.log('isUpdated:::',isUpdated);
     if(isUpdated) {
       // toast
       this.uiService.toastInfo('Usuario actualizado!');
