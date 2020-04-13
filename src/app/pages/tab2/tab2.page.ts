@@ -39,6 +39,8 @@ export class Tab2Page {
         position: false,
       };
 
+      this.tempImages = [];
+
       this.route.navigateByUrl('/main/tabs/tab1');
     }
     
@@ -91,6 +93,7 @@ export class Tab2Page {
   processImage(options: CameraOptions) {
     this.camera.getPicture(options).then((imageData) => {
       const img = window.Ionic.WebView.convertFileSrc(imageData);
+      this.postsService.uploadImage(imageData);
       this.tempImages.push(img);
       }, (err) => {
        // Handle error
